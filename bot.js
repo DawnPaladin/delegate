@@ -27,9 +27,6 @@ if (process.env.MONGO_URI) {
 
 
 const adapter = new SlackAdapter({
-    // REMOVE THIS OPTION AFTER YOU HAVE CONFIGURED YOUR APP!
-    enable_incomplete: true,
-
     // parameters used to secure webhook endpoint
     verificationToken: process.env.VERIFICATION_TOKEN,
     clientSigningSecret: process.env.CLIENT_SIGNING_SECRET,  
@@ -42,7 +39,7 @@ const adapter = new SlackAdapter({
     clientSecret: process.env.CLIENT_SECRET,
     scopes: ['bot'], 
     redirectUri: process.env.REDIRECT_URI,
- 
+
     // functions required for retrieving team-specific info
     // for use in multi-team apps
     getTokenForTeam: getTokenForTeam,
