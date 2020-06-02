@@ -22,10 +22,35 @@ module.exports = function(controller) {
 			const receivingUserId = messageParts[1];
 			const task = messageParts[3];
 
-			bot.httpBody({text:`Got it. I'll ask <@${receivingUserId}> to "${task}" and report back when they're done.`});
+			await bot.replyPublic(message, `"${task}" has been delegated to <@${receivingUserId}>.`);
 
 			await bot.startPrivateConversation(receivingUserId);
-			await bot.say(`<@${sendingUserId}> has a new task for you: ${task}`);
+			
+			// TODO: Add context link (https://api.slack.com/methods/chat.getPermalink)
+			
+			const blocks = {
+				"blocks": [
+					{
+						"type": "section",
+						"text": {
+							"type": "mrkdwn",
+							"text": `<@${sendingUserId}> has a new task for you: ${task}`,
+						},
+						"accessory": {
+							"type": "button",
+							"text": {
+								"type": "plain_text",
+								"text": "✔ Complete",
+								"emoji": true
+							},
+							"value": "click_me_123"
+						}
+					}
+				]
+			}
+			
+			await bot.say(blocks);
+			
 		}
 	});
 }
