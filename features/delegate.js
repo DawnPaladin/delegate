@@ -63,9 +63,6 @@ module.exports = function(controller) {
 		const worker = message.user;
 		
 		await bot.startConversationInChannel(channelId);
-		await bot.say({
-			text: `<@${worker}> reports that the task <@${assigner}> delegated to them is complete: ${task}`,
-			icon_url: "http://lorempixel.com/48/48/"
-		})
+		await bot.say(`<@${worker}> reports that the task <@${assigner}> delegated to them is complete: ${task}`);
 	});
 }
