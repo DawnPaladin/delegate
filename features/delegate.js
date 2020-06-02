@@ -20,14 +20,13 @@ module.exports = function(controller) {
 			
 		} else {
 			console.log(message);
+			
 			const worker = messageParts[1];
 			const task = messageParts[3];
 
 			await bot.replyPublic(message, `"${task}" has been delegated to <@${worker}>.`);
 
 			await bot.startPrivateConversation(worker);
-			
-			// TODO: Add context link (https://api.slack.com/methods/chat.getPermalink)
 			
 			await bot.say({
 				"blocks": [
