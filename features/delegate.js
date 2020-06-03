@@ -1,6 +1,7 @@
 module.exports = function(controller) {
+	// Listen for slash commands. We have only one: /delegate @user Task to be completed
 	controller.on('slash_command', async(bot, message) => {
-		const assigner = message.user_id;
+		const assigner = message.user_id; // ID of the user assigning the task
 		
 		const messageParts = message.text.match(/<@(U\w+)\|(\w+)>\s*(.*)/); // regexr.com/55tlg
 		
@@ -9,16 +10,14 @@ module.exports = function(controller) {
 			await bot.replyPrivate(message, "😞 Sorry, I didn't catch that. I need you to ask me like this: */delegate @user Do the thing*");
 			
 		} else {
-			console.log(message);
-			
-			const worker = messageParts[1];
-			const task = messageParts[3];
+			const worker = messageParts[1]; // ID of the user being assigned to work on the task
+			const task = messageParts[3]; // text of the task
 
 			await bot.replyPublic(message, `"${task}" has been delegated to <@${worker}>.`);
 
 			await bot.startPrivateConversation(worker);
 			
-			await bot.say({
+			await bot.say({ // built with https://api.slack.com/tools/block-kit-builder
 				"blocks": [
 					{
 						"type": "section",
@@ -42,9 +41,8 @@ module.exports = function(controller) {
 		}
 	});
 	
+	// React to button when task is complete
 	controller.on('block_actions', async(bot, message) => {
-		console.log(message);
-		
 		// Button value looks like this: channelId|assigner|task
 		const messageArray = message.text.split('|');
 		const channelId = messageArray.shift();
