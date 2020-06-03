@@ -1,13 +1,3 @@
-// Workspace: https://app.slack.com/client/T014GSPLNH2/C014FQ47P26
-// Bot controls: https://api.slack.com/apps/A0150GPN4BS
-
-// Plan for no-database system is to receive a message from one user and immediately pass it to another
-// Persistence options: https://botkit.ai/docs/v4/core.html#enable-conversation-persistence
-// https://www.npmjs.com/package/botbuilder-storage-mongodb
-// Or just use process.env.MONGO_URI in bot.js
-
-// const { SlackDialog } = require('botbuilder-adapter-slack');
-
 module.exports = function(controller) {
 	controller.on('slash_command', async(bot, message) => {
 		const assigner = message.user_id;

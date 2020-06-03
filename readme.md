@@ -1,10 +1,7 @@
-# Botkit Starter Kit
+# Delegate
 
-This is a Botkit starter kit for slack, created with the [Yeoman generator](https://github.com/howdyai/botkit/tree/master/packages/generator-botkit#readme).
+This simple Slack bot allows you to divide tasks among your team members. The intended use case is that you're discussing your project in a Slack channel and coming up with action items. 
 
-To complete the configuration of this bot, make sure to update the included `.env` file with your platform tokens and credentials.
+When you've identified a task that needs to be done, write **/delegate @user Task to be completed**; Delegate will DM your teammate with the task and give them a "Complete" button to click. When they click the button, Delegate will report back in the original channel that the task is complete.
 
-[Botkit Docs](https://botkit.ai/docs/v4)
-
-This bot is powered by [a folder full of modules](https://botkit.ai/docs/v4/core.html#organize-your-bot-code). 
-Edit the samples, and add your own in the [features/](features/) folder.
+Built with [BotKit](https://botkit.ai/docs/v4/reference/slack.html). The file with all the business logic in it is [features/delegate.js](features/delegate.js).
